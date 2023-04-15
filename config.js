@@ -1,9 +1,9 @@
 const config = {
     db: {
-        host: "localhost",
-        user: "djose1164",
-        password: "Kirito08.",
-        database: "flashcard"
+        host: "",
+        user: "",
+        password: ".",
+        database: ""
     },
     listPerPage: 10
 }

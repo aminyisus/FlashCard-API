@@ -1,9 +1,11 @@
+const env = process.env;
+
 const config = {
     db: {
-        host: "",
-        user: "",
-        password: ".",
-        database: ""
+        host: env.host,
+        user: env.user,
+        password: env.password,
+        database: env.database
     },
     listPerPage: 10
 }

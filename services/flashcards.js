@@ -17,11 +17,11 @@ async function create({ title, description }) {
     return { msg };
 }
 
-async function update({ id, title, description }) {
+async function update({ flashcard_id, title, description }) {
     const result = await db.query(
         `
         UPDATE flashcards SET title = '${title}', description = '${description}'
-        WHERE id = '${id}'
+        WHERE flashcard_id = '${flashcard_id}'
         `
     );
 
@@ -33,10 +33,10 @@ async function update({ id, title, description }) {
     return { msg };
 }
 
-async function Delete({ id }) {
+async function delete_({ flashcard_id }) {
     const result = await db.query(
         `
-        DELETE FROM flashcards WHERE id = '${id}'
+        DELETE FROM flashcards WHERE id = '${flashcard_id}'
         `
     );
 
@@ -48,12 +48,12 @@ async function Delete({ id }) {
     return { msg };
 }
 
-async function idflashcard(id) {
+async function getById(flashcard_id) {
     const result = await db.query(
         `
         SELECT *
         FROM flashcards
-        WHERE id = '${id}'
+        WHERE id = '${flashcard_id}'
         `
     );
 
@@ -75,6 +75,6 @@ module.exports = {
     create,
     all,
     update,
-    Delete,
-    idflashcard
+    delete_,
+    getById
 };

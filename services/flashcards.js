@@ -1,11 +1,11 @@
 const db = require("./db");
 const config = require("../config")
 
-async function create(flashcard) {
+async function create({ title, description }) {
     const result = await db.query(
         `
-        INSERT INTO flashcards
-        VALUES(NULL, '${flashcard.title}', '${flashcard.description}', NULL)
+        INSERT INTO flashcards(title, description)
+        VALUES('${title}', '${description}')
         `
     );
 
@@ -18,9 +18,17 @@ async function create(flashcard) {
 }
 
 async function all() {
+    const result = await db.query(
+        `
+        SELECT *
+        FROM flashcards
+        `
+    );
 
+    return { result };
 }
 
 module.exports = {
-    create
-}
+    create,
+    all
+};

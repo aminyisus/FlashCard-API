@@ -17,6 +17,49 @@ async function create({ title, description }) {
     return { msg };
 }
 
+async function update({ id, title, description }) {
+    const result = await db.query(
+        `
+        UPDATE flashcards SET title = '${title}', description = '${description}'
+        WHERE id = '${id}'
+        `
+    );
+
+    let msg = "Error in updating flashcard.";
+
+    if (result.affectedRows)
+        msg = "Flashcard updated successfully."
+
+    return { msg };
+}
+
+async function Delete({ id }) {
+    const result = await db.query(
+        `
+        DELETE FROM flashcards WHERE id = '${id}'
+        `
+    );
+
+    let msg = "Error in deleting flashcard.";
+
+    if (result.affectedRows)
+        msg = "Flashcard deleted successfully."
+
+    return { msg };
+}
+
+async function idflashcard(id) {
+    const result = await db.query(
+        `
+        SELECT *
+        FROM flashcards
+        WHERE id = '${id}'
+        `
+    );
+
+    return { result };
+}
+
 async function all() {
     const result = await db.query(
         `
@@ -30,5 +73,8 @@ async function all() {
 
 module.exports = {
     create,
-    all
+    all,
+    update,
+    Delete,
+    idflashcard
 };

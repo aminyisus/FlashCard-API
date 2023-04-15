@@ -4,7 +4,7 @@ const flashcards = require("../services/flashcards")
 
 router.get("/", async function(req, res, next) {
     try {
-        res.json(await flashcards.create(req.query.page));
+        res.json(await flashcards.all());
     } catch(err) {
         console.log("Error while getting all: ", err.message);
         next(err);

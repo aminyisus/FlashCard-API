@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const flashcardsRoute = require("./routes/flashcards");
+const usersRoute = require("./routes/users");
 
 const app = express();
 const port = 3000;
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/flashcards", flashcardsRoute);
+app.use("/users", usersRoute);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
@@ -27,6 +29,6 @@ app.use((err, req, res, next) => {
     return;
   });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
     console.log("Running at: http://localhost:3000/" )
 })

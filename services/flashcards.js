@@ -33,17 +33,15 @@ async function update({ flashcard_id, title, description }) {
     return { msg };
 }
 
-async function delete_({ flashcard_id }) {
+async function delete_(flashcard_id) {
     const result = await db.query(
         `
-        DELETE FROM flashcards WHERE id = '${flashcard_id}'
+        DELETE FROM flashcards WHERE flashcard_id = '${flashcard_id}'
         `
     );
 
-    let msg = "Error in deleting flashcard.";
-
-    if (result.affectedRows)
-        msg = "Flashcard deleted successfully."
+    let msg = result.affectedRows ? "Flashcard deleted successfully."
+                                  : "Error in deleting flashcard.";
 
     return { msg };
 }

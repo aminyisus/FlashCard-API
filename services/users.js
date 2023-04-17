@@ -17,6 +17,22 @@ async function create({ name, last_name, email, password }) {
     return { msg };
 }
 
+async function verifyUser({ email, password }) {
+    const result = await db.query(
+        `
+        IF EXISTS(SELECT * FROM users WHERE email = '${email}' AND password= '${password}') THEN
+            SELECT TRUE AS UserExists;
+        ELSE
+            SELECT FALSE AS UserExists;
+        END IF;
+        `
+    );
+    const validated = result[0][0].UserExists === 1;
+    console.log(validated);
+    return { validated };
+}
+
 module.exports = {
-    create
+    create,
+    verifyUser
 };

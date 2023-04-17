@@ -15,7 +15,7 @@ router.get("/", async function(req, res, next) {
 router.get('/:id', async (req, res, next) => {
     try {
       const id = req.params.id;
-      const { result } = await idflashcard(id);
+      const { result } = await flashcards.getById(id);
   
       if (result.length === 0) {
         res.status(404).send('Flashcard not found');
@@ -43,7 +43,7 @@ router.get('/:id', async (req, res, next) => {
   router.delete('/:id', async (req, res, next) => {
     try {
       const id = req.params.id;
-      const { msg } = await Delete({ id });
+      const { msg } = await flashcards.delete_(id);
   
       res.json({ message: msg });
     } catch (error) {
@@ -51,9 +51,6 @@ router.get('/:id', async (req, res, next) => {
       next(error);
     }
   });
-
-
-
 
 router.post("/", async function(req, res, next) {
     try {
